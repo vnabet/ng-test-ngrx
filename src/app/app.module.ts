@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
+import { metaReducers, rootReducer } from './state/00-reducter';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,11 @@ import { StoreModule } from '@ngrx/store';
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({
+      root: rootReducer
+    }, {
+      metaReducers
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

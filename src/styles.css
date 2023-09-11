@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  width: 100%;
+  height: 100vh;
+}
+body {
+  background-image: url(https://www.desicomments.com/wallpapers/wp-content/uploads/2014/12/Ocean-Waves-Fog.jpg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
