@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Store} from '@ngrx/store';
+import {Store, select} from '@ngrx/store';
 import { changeUsername, initAction } from './state/01-actions';
 import {Observable} from 'rxjs';
+import { State } from './state/00-reducter';
+import { User } from './models/user';
+import {getUser} from './state/02-selectors';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +13,14 @@ import {Observable} from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'ng-test-ngrx';
-  user$:Observable<{username:string, isAdmin:boolean}> = this.store.select((state: any) => state.root.user)
+  // user$:Observable<{username:string, isAdmin:boolean}> = this.store.select((state: any) => state.root.user)
+  // user$:Observable<User> = this.store.pipe(
+  //   select((state) => state.root.user)
+  // )
 
-  constructor(private store:Store) {}
+  user$:Observable<User> =  this.store.select<User>(getUser);
+
+  constructor(private store:Store<State>) {}
 
   ngOnInit(): void {
       this.store.dispatch(initAction());

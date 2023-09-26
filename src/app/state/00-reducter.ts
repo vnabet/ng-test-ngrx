@@ -1,16 +1,31 @@
 
-import {ActionReducer, createReducer, MetaReducer, on} from '@ngrx/store';
+import {Action, ActionReducer, createReducer, MetaReducer, on} from '@ngrx/store';
 import { changeUsername, initAction } from './01-actions';
+import { User } from '../models/user';
 
-const initialState = {
+
+export const enum features {
+  ROOT_FEATURE_KEY = 'root'
+}
+
+export interface State {
+  readonly [features.ROOT_FEATURE_KEY]: RootState
+}
+
+export interface RootState {
+  appName: string;
+  user: User;
+}
+
+const initialState:RootState = {
   appName: 'NgRx',
   user: {
-    username: '',
+    userName: '',
     isAdmin: false
   }
 }
 
-function log(reducer: ActionReducer<any>):ActionReducer<any> {
+function log(reducer: ActionReducer<State>):ActionReducer<State> {
   return (state, action) => {
     const currentState = reducer(state, action);
 
@@ -24,8 +39,8 @@ function log(reducer: ActionReducer<any>):ActionReducer<any> {
   };
 }
 
-export const rootReducer = createReducer(initialState,
-  on(initAction, (state) => {
+export const rootReducer = createReducer<RootState, Action>(initialState,
+  on(initAction, (state:RootState):RootState => {
     return {
       ...state,
       user: {
@@ -35,14 +50,14 @@ export const rootReducer = createReducer(initialState,
       }
     }
   }),
-    on(changeUsername, (state, props) => {
+    on(changeUsername, (state:RootState, props):RootState => {
       //console.log(event)
 
       return {
         ...state,
         user: {
           ...state.user,
-          username: props.username
+          userName: props.username
         }
       }
     }));

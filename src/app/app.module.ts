@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import { metaReducers, rootReducer } from './state/00-reducter';
+import { features, metaReducers, rootReducer } from './state/00-reducter';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -12,10 +13,11 @@ import { metaReducers, rootReducer } from './state/00-reducter';
   imports: [
     BrowserModule,
     StoreModule.forRoot({
-      root: rootReducer
+      [features.ROOT_FEATURE_KEY] : rootReducer
     }, {
       metaReducers
-    })
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode(), name: 'NGRX Starter de la mort' })
   ],
   providers: [],
   bootstrap: [AppComponent]
