@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Store, select} from '@ngrx/store';
-import { changeUsername, initAction } from './state/01-actions';
+import { changeIsAdmin, changeUsername, initAction } from './state/01-actions';
 import {Observable} from 'rxjs';
 import { State } from './state/00-reducter';
 import { User } from './models/user';
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
 
   changeUsername():void {
     this.store.dispatch(changeUsername({username: 'Vincent'}));
+    // this.store.dispatch(changeIsAdmin({isAdmin: false}));
   }
 
 }

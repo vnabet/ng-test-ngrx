@@ -15,7 +15,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot({
       [features.ROOT_FEATURE_KEY] : rootReducer
     }, {
-      metaReducers
+      metaReducers,
+      runtimeChecks: {
+        // S'assure que les action ont des noms différents
+        strictActionTypeUniqueness: true,
+        // S'assure que sur les reducers, les props ne sont pas modifiées (immutabilité)
+        strictActionImmutability: true,
+        // S'assure que le state est immutable
+        strictStateImmutability: true
+      }
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode(), name: 'NGRX Starter de la mort' })
   ],
