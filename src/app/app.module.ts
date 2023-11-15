@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { features, metaReducers, rootReducer } from './state/00-reducter';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './state/04-effects';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
         strictStateImmutability: true
       }
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode(), name: 'NGRX Starter de la mort' })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode(), name: 'NGRX Starter de la mort' }),
+    EffectsModule.forRoot([AppEffects]),
+    HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

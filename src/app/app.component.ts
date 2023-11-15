@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import { State } from './state/00-reducter';
 import { User } from './models/user';
 import {getUser} from './state/02-selectors';
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
 
   user$:Observable<User> =  this.store.select<User>(getUser);
 
-  constructor(private store:Store<State>) {}
+  constructor(private store:Store<State>, private usersService:UsersService) {}
 
   ngOnInit(): void {
       this.store.dispatch(RootActions.initApp());
@@ -31,6 +32,8 @@ export class AppComponent implements OnInit {
       // .subscribe((response) => {
       //   console.log('response: ', response)
       // })
+
+      this.usersService.users$.subscribe((users)=> console.log(users))
   }
 
   changeUsername():void {
