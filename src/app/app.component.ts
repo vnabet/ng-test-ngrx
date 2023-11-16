@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Store, select} from '@ngrx/store';
 // import { changeIsAdmin, changeUsername, initAction } from './state/01-actions';
-import { RootActions} from './state/01-actions';
+import { RootActions, loadUsers} from './state/01-actions';
 import {Observable} from 'rxjs';
 import { State } from './state/00-reducter';
 import { User } from './models/user';
@@ -34,12 +34,17 @@ export class AppComponent implements OnInit {
       // })
 
       this.usersService.users$.subscribe((users)=> console.log(users))
+
   }
 
   changeUsername():void {
     this.store.dispatch(RootActions.changeUsername({username: 'Vincent'}));
     // this.store.dispatch(changeUsername({username: 'Vincent'}));
     // this.store.dispatch(changeIsAdmin({isAdmin: false}));
+  }
+
+  loadUsers() {
+    this.store.dispatch(loadUsers())
   }
 
 }

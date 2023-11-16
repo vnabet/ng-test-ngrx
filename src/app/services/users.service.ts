@@ -1,5 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { User } from '../models/user';
 
 
 @Injectable({
@@ -11,5 +13,5 @@ export class UsersService {
 
   constructor() { }
 
-  users$ = this.http.get('https://localhost:3000/api/users');
+  users$:Observable<User[]> = this.http.get<User[]>('https://localhost:3000/api/users');
 }

@@ -4,7 +4,7 @@ html, body {
   height: 100vh;
 }
 body {
-  background-image: url(https://www.desicomments.com/wallpapers/wp-content/uploads/2014/12/Ocean-Waves-Fog.jpg);
+  /* background-image: url(https://www.desicomments.com/wallpapers/wp-content/uploads/2014/12/Ocean-Waves-Fog.jpg); */
   display: flex;
   justify-content: center;
   align-items: center;

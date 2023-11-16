@@ -3,6 +3,7 @@
   <h1>NgRx</h1>
   <div>
     <button (click)="changeUsername()">Change Username</button>
+    <button (click)="loadUsers()">Load users</button>
   </div>
 
   <ng-container *ngIf="user$ | async as user" >
