@@ -20,4 +20,3 @@ export const RootActions = createActionGroup({
 export const loadUsers = createAction('[API Users] Load Users');
 export const loadUsersSuccess = createAction('[API Users] Load Users success', props<{users:User[]}>());
 export const loadUsersError = createAction('[API Users] Load Users error', props<{error:HttpErrorResponse | Error}>());
- 

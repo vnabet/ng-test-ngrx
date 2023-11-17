@@ -1,7 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { props } from '@ngrx/store';
 
 import {Action, ActionReducer, createReducer, MetaReducer, on} from '@ngrx/store';
 // import { changeUsername, initAction } from './01-actions';
-import { RootActions } from './01-actions';
+import { loadUsers, loadUsersError, loadUsersSuccess, RootActions } from './01-actions';
 import { User } from '../models/user';
 
 
@@ -16,6 +18,9 @@ export interface State {
 export interface RootState {
   appName: string;
   user: User;
+  users: User[];
+  loaded?:boolean;
+  error:HttpErrorResponse | Error | string | null;
 }
 
 const initialState:RootState = {
@@ -23,7 +28,9 @@ const initialState:RootState = {
   user: {
     userName: '',
     isAdmin: false
-  }
+  },
+  users:[],
+  error: null
 }
 
 function log(reducer: ActionReducer<State>):ActionReducer<State> {
@@ -61,6 +68,10 @@ export const rootReducer = createReducer<RootState, Action>(initialState,
           userName: props.username
         }
       }
-    }));
+    }),
+    on(loadUsers, (state:RootState) => {return {...state, loaded: false}}),
+    on(loadUsersSuccess, (state:RootState, props) => {return {...state, users: props.users, loaded: true}}),
+    on(loadUsersError, (state:RootState, props) => {return {...state, users: [], loaded: true, error: props.error}}),
+  );
 
 export const metaReducers : MetaReducer[] = [log];

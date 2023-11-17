@@ -10,10 +10,10 @@ export function server() {
 
       this.get('/users',  () => {
         return [
-          {id: 1, username: 'Vincent', isAdmin: true},
-          {id: 2, username: 'Peggy', isAdmin: false},
-          {id: 3, username: 'Simon', isAdmin: false},
-          {id: 4, username: 'Jeanne', isAdmin: false},
+          {id: 1, userName: 'Vincent', isAdmin: true},
+          {id: 2, userName: 'Peggy', isAdmin: false},
+          {id: 3, userName: 'Simon', isAdmin: false},
+          {id: 4, userName: 'Jeanne', isAdmin: false},
         ]
       },  { timing: 1000})
     }

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {Store, select} from '@ngrx/store';
 // import { changeIsAdmin, changeUsername, initAction } from './state/01-actions';
@@ -5,7 +6,7 @@ import { RootActions, loadUsers} from './state/01-actions';
 import {Observable} from 'rxjs';
 import { State } from './state/00-reducter';
 import { User } from './models/user';
-import {getUser} from './state/02-selectors';
+import {getError, getIsLoaded, getUser, getUsers} from './state/02-selectors';
 import { UsersService } from './services/users.service';
 
 @Component({
@@ -21,6 +22,9 @@ export class AppComponent implements OnInit {
   // )
 
   user$:Observable<User> =  this.store.select<User>(getUser);
+  users$:Observable<User[]> = this.store.select<User[]>(getUsers);
+  isLoaded$:Observable<boolean|undefined> = this.store.select<boolean|undefined>(getIsLoaded);
+  error$:Observable<HttpErrorResponse | Error | string | null> = this.store.select<HttpErrorResponse | Error | string | null>(getError)
 
   constructor(private store:Store<State>, private usersService:UsersService) {}
 

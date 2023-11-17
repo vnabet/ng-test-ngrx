@@ -10,4 +10,13 @@
     <h4>Username:{{user.userName}}</h4>
     <h4>isAdmin: {{user.isAdmin}}</h4>
   </ng-container>
+
+  <div *ngIf="error$ | async">ERREUR: {{error$ | async}}</div>
+  <div *ngIf="(isLoaded$ | async) === false">Chargement...</div>
+  <div *ngIf="(isLoaded$ | async) === true">
+    <ul>
+      <li *ngFor="let user of users$ | async">{{user.userName}}</li>
+    </ul>
+  </div>
+  <!-- <ng-template #loading>Chargement...</ng-template> -->
 </div>
